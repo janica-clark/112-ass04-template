@@ -1,9 +1,7 @@
-//char *AUTHOR_NAME        = (char *) "Your Name";
-//char *AUTHOR_AUTHORSHIP  = (char *) "I acknowledge that I have worked on this
-// assignment independently, except where explicitly noted and referenced.
-// Any collaboration or use of external resources has been properly cited.
-// I am fully aware of the consequences of academic dishonesty and agree to
-// abide by the university's academic integrity policy.";
+// Janica Clark
+// CSCI 112 Fall 2026
+// Programming Assignment #4
+// I declare that I am the author of this work, take full responsibility for it, and have disclosed any material external assistance.
 
 // code.c — student implementation only
 
@@ -57,6 +55,14 @@
 
 void clear_string(char s[], int n)
 {
+    int i=0;
+    loop:
+        if (i >= n)
+            goto done;
+        s[i] = '\0';
+        i++;
+        goto loop;
+    done: 
 
 }
 
@@ -70,6 +76,8 @@ void clear_string(char s[], int n)
 
 int my_isdigit(char c)
 {
+    if (c >= '0' && c <= '9')
+        return 1;
     return 0;
 }
 
@@ -83,6 +91,8 @@ int my_isdigit(char c)
 
 int my_islower(char c)
 {
+    if (c >= 'a' && c <= 'z')
+        return 1;
     return 0;
 }
 
@@ -101,6 +111,8 @@ int my_islower(char c)
 
 int my_isupper(char c)
 {
+    if (c >= 'A' && c <= 'Z')
+        return 1;
     return 0;
 }
 
@@ -121,6 +133,8 @@ int my_isupper(char c)
 
 int my_isalpha(char c)
 {
+    if (my_islower(c) || my_isupper(c))
+        return 1;
     return 0;
 }
 
@@ -141,6 +155,13 @@ int my_isalpha(char c)
 
 int my_isalnum(char c)
 {
+    int r = my_isalpha(c) || my_isdigit(c);
+    switch (r) {
+        case 1:
+            return 1;
+        case 0:
+            return 0;
+    }
     return 0;
 }
 
@@ -161,6 +182,17 @@ int my_isalnum(char c)
 
 int my_strcmp(char a[], char b[])
 {
+    int i = 0;
+    loop:
+        if (a[i] == '\0')
+            goto done;
+        if (a[i] < b[i])
+            return -1;
+        if (a[i] > b[i])
+            return 1;
+        i++;
+        goto loop;
+    done:
     return 0;
 }
 
@@ -179,7 +211,14 @@ int my_strcmp(char a[], char b[])
 
 int my_strchr(char s[], char c)
 {
-    return 0;
+    int i = 0;
+    loop:
+        if (s[i] == '\0')
+            return -1;
+        if (s[i] == c)
+            return i;
+        i++;
+        goto loop;
 }
 
 
@@ -196,7 +235,16 @@ int my_strchr(char s[], char c)
 
 int my_pow(int a, int b)
 {
-    return 0;
+    int result = 1;
+    int i = 0;
+    loop:
+        if (i >= b)
+            goto done;
+        result = result * a;
+        i++;
+        goto loop;
+    done:
+        return result;
 }
 
 
@@ -213,7 +261,16 @@ int my_pow(int a, int b)
 
 double my_pow_double(double a, int b)
 {
-    return 0.0;
+    double result = 1.0;
+    int i = 0;
+    loop:
+        if (i >= b)
+            goto done;
+        result = result * a;
+        i++;
+        goto loop;
+    done:
+    return result;
 }
 
 
@@ -235,6 +292,10 @@ double my_pow_double(double a, int b)
 char * format_my_isupper(char dest[], char c, int r)
 {
     clear_string(dest, 64);
+    if (r == 1)
+        sprintf(dest, "isupper('%c') = %s", c, "true");
+    else
+        sprintf(dest, "isupper('%c') = %s", c, "false");
     return dest;
 }
 
@@ -252,6 +313,10 @@ char * format_my_isupper(char dest[], char c, int r)
 char * format_my_isalpha(char dest[], char c, int r)
 {
     clear_string(dest, 64);
+    if (r == 1)
+        sprintf(dest, "isalpha('%c') = %s", c, "true");
+    else
+        sprintf(dest, "isalpha('%c') = %s", c, "false");
     return dest;
 }
 
@@ -269,6 +334,10 @@ char * format_my_isalpha(char dest[], char c, int r)
 char * format_my_isalnum(char dest[], char c, int r)
 {
     clear_string(dest, 64);
+    if (r == 1)
+        sprintf(dest, "isalnum('%c') = %s", c, "true");
+    else
+        sprintf(dest, "isalnum('%c') = %s", c, "false");
     return dest;
 }
 
@@ -288,9 +357,19 @@ char * format_my_isalnum(char dest[], char c, int r)
 char * format_my_strcmp(char dest[], int r)
 {
     clear_string(dest, 64);
+    switch (r) {
+        case -1:
+            sprintf(dest, "compariosn: %s", "less");
+            break;
+        case 0:
+            sprintf(dest, "comparison: %s", "equal");
+            break;
+        case 1:
+            sprintf(dest, "comparison: %s" "greater");
+            break;
+    }
     return dest;
 }
-
 
 // ============================================================
 // format_my_strchr
@@ -305,6 +384,10 @@ char * format_my_strcmp(char dest[], int r)
 char * format_my_strchr(char dest[], int r)
 {
     clear_string(dest, 64);
+    if (r >= 0)
+        sprintf(dest, "found at: %d", r);
+    else
+        sprintf(dest, "not found");
     return dest;
 }
 
@@ -323,6 +406,7 @@ char * format_my_strchr(char dest[], int r)
 char * format_my_pow(char dest[], int r)
 {
     clear_string(dest, 64);
+    sprintf(dest, "pow = %-12d", r);
     return dest;
 }
 
@@ -347,5 +431,15 @@ char * format_my_pow(char dest[], int r)
 char * format_my_pow_double(char dest[], double r)
 {
     clear_string(dest, 64);
+    if (r < 10 && r > -10)
+        sprintf(dest, "%012.9f", r);
+    else if (r < 100 && r > -100)
+        sprintf(dest, "%012.8f", r);
+    else if (r < 1000 && r > -1000)
+        sprintf(dest, "%012.7f", r);
+    else if (r < 10000 && r > -10000)
+        sprintf(dest, "%012.6f", r);
+    else 
+        sprintf(dest, "%012.5f", r);
     return dest;
 }

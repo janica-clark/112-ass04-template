@@ -29,6 +29,15 @@ int main(void)
     // my_isdigit('5');
     // printf("%d\n", my_pow(2, 8));
     // printf("%s\n", format_my_pow(buf, my_pow(2, 8)));
-
-    return 0;
+ printf("%d\n", my_isdigit('5'));
+   printf("%d\n", my_pow(2, 8));
+   printf("%s\n", format_my_isupper(buf, 'A', my_isupper('A')));
+   printf("%d\n", my_isalnum('!'));
+printf("%d\n", my_strcmp("abc", "abd"));
+printf("%d\n", my_strchr("hello", 'l'));
+printf("%s\n", format_my_isalpha(buf, '3', my_isalpha('3')));
+printf("%s\n", format_my_strcmp(buf, my_strcmp("abc", "abc")));
+printf("%s\n", format_my_strchr(buf, my_strchr("hello", 'l')));
+printf("[%s]\n", format_my_pow(buf, my_pow(2, 8)));
+printf("%s\n", format_my_pow_double(buf, my_pow_double(2.5, 3)));
 }
