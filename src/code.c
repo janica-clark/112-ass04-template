@@ -184,7 +184,7 @@ int my_strcmp(char a[], char b[])
 {
     int i = 0;
     loop:
-        if (a[i] == '\0')
+        if (a[i] == '\0' && b[i] == '\0')
             goto done;
         if (a[i] < b[i])
             return -1;
@@ -359,13 +359,13 @@ char * format_my_strcmp(char dest[], int r)
     clear_string(dest, 64);
     switch (r) {
         case -1:
-            sprintf(dest, "compariosn: %s", "less");
+            sprintf(dest, "comparison: %s", "less");
             break;
         case 0:
             sprintf(dest, "comparison: %s", "equal");
             break;
         case 1:
-            sprintf(dest, "comparison: %s" "greater");
+            sprintf(dest, "comparison: %s", "greater");
             break;
     }
     return dest;
